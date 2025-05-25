@@ -1,0 +1,9 @@
+"postinstall": "prisma generate" 在 vercel 上部署时使用
+"prisma:push": "dotenv -e .env.local -- prisma db push --force-reset",
+    --force-reset: 强制重置数据库
+
+
+// 必须在 .env 配置 DATABASE_URL & DIRECT_URL 
+// （在 .env.xxx 里配置没用）
+npx prisma db push
+npx prisma studio

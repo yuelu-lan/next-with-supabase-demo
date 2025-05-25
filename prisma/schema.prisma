@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Movie {
+  id              Int      @id @default(autoincrement())
+  rank            String   // From douban_top250 data
+  title           String
+  originalTitle   String?  @map("original_title")
+  aliases         String?  // From douban_top250 data
+  year            String?
+  country         String?  // From douban_top250 data
+  director        String?
+  actors          String[] @default([]) // Corrected: list type, can be empty. Added default empty array.
+  genre           String?
+  rating          Float?
+  numberOfRatings Int?     @map("number_of_ratings") // From douban_top250 data
+  quote           String?  // From douban_top250 data
+  imageUrl        String?  @map("image_url")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
